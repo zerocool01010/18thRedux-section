@@ -8,7 +8,8 @@ createSlice({
     initialState,
     reducers: {
         increment(state) {
-            state.counter++
+            state.counter++ //en un slice que es propio del Redux Toolkit, este package trabaja internamente los estados de una manera que los clona y los hace inmutables
+                            //asi que si podemos hacerlo de esta manera a pesar de que en el counterReducer recomendamos no hacerlo de esta forma, pero ahi no estamos en toolkit
         },
         decrement(state){
             state.counter--
