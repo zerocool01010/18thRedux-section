@@ -4,7 +4,9 @@ const initialState = { counter: 0, showCounter: true}
 
 const counterReducer = (state = initialState, action) => {
     if (action.type === 'increment') {
-        return {
+        //SIEMPRE que estemos trabajando con useReducer o reducer functions, tener en cuenta lo siguiente:
+        //NUNCA modificar haciendo algo como esto: state.counter++
+        return { //SIEMPRE retornar un objeto que reemplace el objeto existente
             counter: state.counter +1,
             showCounter: state.showCounter
         }
