@@ -5,9 +5,10 @@ import classes from './Counter.module.css';
 const Counter = () => {
   const [increaseNumb, setIncreaseNumb] = useState(0)
   const [inputing, setInputing] = useState(false)
-  const [showCounter, setShowCounter] = useState(true)
+  /* const [showCounter, setShowCounter] = useState(true) */
   const dispatch = useDispatch()
   const counter = useSelector(state => state.counter)
+  const showCounter = useSelector(state => state.showCounter)
 
   const incremHandler = (event) => {
     if (!inputing) {
@@ -30,7 +31,8 @@ const Counter = () => {
   }
 
   const toggleCounterHandler = () => {
-    setShowCounter(!showCounter)
+    /* setShowCounter(!showCounter) */
+    dispatch({type: 'toggle'})
   };
 
   return (
