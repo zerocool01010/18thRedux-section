@@ -1,9 +1,10 @@
 import { createStore } from 'redux'
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, configureStore } from '@reduxjs/toolkit'; //configureStore permite crear un Store como createStore, pero lo hace mejor para mergear reducers 
+import { configure } from '@testing-library/react';
 
 const initialState = { counter: 0, showCounter: true}
 
-createSlice({
+const counterSlice = createSlice({
     name: 'counter',
     initialState,
     reducers: {
@@ -20,13 +21,16 @@ createSlice({
         toogleCounter(state){
             state.showCounter = !state.showCounter
         }
-    },
-    decrement() {},
-    increase() {},
-    toogleCounter() {},
+    }
 })
 
-const counterReducer = (state = initialState, action) => {
+const store = configureStore({
+    reducer: counterSlice.reducer //nos quedamos con una especie de global reducer que Redux demanda, por eso es singular, y asignamos el sliceReducer de arriba al main reducer de aca
+})
+
+export default store
+
+/* const counterReducer = (state = initialState, action) => {
     if (action.type === 'increment') {
         //SIEMPRE que estemos trabajando con useReducer o reducer functions, tener en cuenta lo siguiente:
         //NUNCA modificar haciendo algo como esto: state.counter++
@@ -60,8 +64,4 @@ const counterReducer = (state = initialState, action) => {
         }
     }
     return state
-}
-
-const store = createStore(counterReducer)
-
-export default store
+} */
