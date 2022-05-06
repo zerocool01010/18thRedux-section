@@ -7,8 +7,8 @@ const Header = () => {
   const dispatch = useDispatch()
   const logged = useSelector(state => state.authRed.logged)
 
-  const loginHandler = () => {
-    dispatch(authActions.login())
+  const logoutHandler = () => {
+    dispatch(authActions.logout())
   }
 
   return (
@@ -23,7 +23,7 @@ const Header = () => {
             <a href='/'>My Sales</a>
           </li>
           <li>
-            {logged && <button onClick={loginHandler}>Logout</button>}
+            {logged && <button onClick={logoutHandler}>Logout</button>}
           </li>
         </ul>
       </nav>
