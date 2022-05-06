@@ -6,25 +6,23 @@ import classes from './Counter.module.css';
 const Counter = () => {
   const [increaseNumb, setIncreaseNumb] = useState(0)
   const [inputing, setInputing] = useState(false)
-  /* const [showCounter, setShowCounter] = useState(true) */
   const dispatch = useDispatch()
-  const counter = useSelector(state => state.counter)
-  const showCounter = useSelector(state => state.showCounter)
+  const counter = useSelector(state => state.counterRed.counter)
+  const showCounter = useSelector(state => state.counterRed.showCounter)
 
   const incremHandler = (event) => {
     if (!inputing) {
       if (event.target.name === 'increase') {
-        dispatch(/* {type: 'increment'} */ counterActions.increment()) //con este method obtenemos automaticamente un object action creado aqui
+        dispatch(counterActions.increment()) //con este method obtenemos automaticamente un object action creado aqui
       }
       if (event.target.name === 'decrease') {
-        dispatch(/* {type: 'decrement'} */counterActions.decrement())
+        dispatch(counterActions.decrement())
       }
     }
     if (inputing) {
-      dispatch(/* {type: event.target.name, amount: increaseNumb} */ counterActions.increase(event.target.name === 'decrease' ? increaseNumb*(-1) : increaseNumb)) // el action object tiene esta forma:
-      setInputing(false)                                              // {type: id-unico-automaticamente-generado, payload: numeroQuePasamosComoParam} //el numeroQuepasamosComoParam = increaseNumb
-                                                                      //el attr payload es default, lo asigna redux toolkit, no lo ponemos nosotros, entonces debemos
-                                                                      //modificar esto en nuestro indexStore file donde tenemos el global reducer con estos metodos definidos
+      const paramForSumOrSus = event.target.name === 'decrease' ? increaseNumb*(-1) : increaseNumb
+      dispatch(counterActions.increase(paramForSumOrSus))
+      setInputing(false)                                              
     } 
   }
 
@@ -34,7 +32,6 @@ const Counter = () => {
   }
 
   const toggleCounterHandler = () => {
-    /* setShowCounter(!showCounter) */
     dispatch(counterActions.toogleCounter())
   };
 
