@@ -16,13 +16,15 @@ const counterSlice = createSlice({
             state.counter--
         },
         increase(state, action){
-            state.counter = state.counter + action.amount
+            state.counter = state.counter + action./* amount */payload //amount era nuestro custom name de antes, ahora con el configStore de redux toolkit debemos usar payload que es el nombre por defecto
         },
         toogleCounter(state){
             state.showCounter = !state.showCounter
         }
     }
 })
+
+export const counterActions = counterSlice.actions //el counterActions se llevara los diferentes reducers del reducer global para ser utilizados donde sea importado
 
 const store = configureStore({
     reducer: counterSlice.reducer //nos quedamos con una especie de global reducer que Redux demanda, por eso es singular, y asignamos el sliceReducer de arriba al main reducer de aca
